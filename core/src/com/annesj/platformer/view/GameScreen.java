@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class GameScreen implements Screen {
     public TiledMap map;
+    //sets the object for the map
     public OrthogonalTiledMapRenderer renderer;
     public OrthographicCamera camera;
 
@@ -17,6 +18,9 @@ public class GameScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);
         //to callt hje lasss
         camera = new OrthographicCamera(14f, 14f);
+        //to initialize the camera
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
+        //sets the view to half of what it is
     }
 
     @Override
