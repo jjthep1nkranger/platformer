@@ -20,6 +20,7 @@ public class GameScreen implements Screen {
         //to call the class to render the map
 
         float width = Gdx.graphics.getWidth();
+        //finds width of window for use in the game map
         float height = Gdx.graphics.getHeight();
         //fits thh game map to the window
         camera = new OrthographicCamera(14f, 14f * (height / width));
