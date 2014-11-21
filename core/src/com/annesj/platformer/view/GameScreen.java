@@ -2,6 +2,7 @@ package com.annesj.platformer.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -31,6 +32,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(1f,.52f,.9686274f,1f);
+        //sets the color of your clear
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //clears the screen using the color youve chosen
         camera.update();
         //updating the camera
         renderer.setView(camera);
@@ -41,7 +46,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+    camera.viewportWidth = 14f;
+    camera.viewportHeight = 14f * height / width;
+    camera.update();
+    //sets the weight and hidth to the window when resizing
     }
 
     @Override
