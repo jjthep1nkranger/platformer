@@ -15,8 +15,7 @@ public class Player {
     }
 
     public void draw(Batch spriteBatch){
-        spriteBatch.draw(spriteSheet, 0, 0, 70, 100);
-    }
+        spriteBatch.draw(spriteSheet, 0, 0, 70, 100);}//the function for drawing the player
 
     public void update(float deltaTime){
 

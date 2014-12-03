@@ -27,8 +27,8 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera(14f, 14f * (height / width));//to initialize the camera
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);//sets the view to half of what it is and center it
 
-        spriteBatch = new SpriteBatch();
-        player = new Player();
+        spriteBatch = new SpriteBatch();//creates the spritebatch object
+        player = new Player();//creates the player object
     }
 
     @Override
@@ -40,9 +40,9 @@ public class GameScreen implements Screen {
         renderer.setView(camera);//sets where the camera is
         renderer.render();//sets render to start
 
-        spriteBatch.begin();
-        player.draw(spriteBatch);
-        spriteBatch.end();
+        spriteBatch.begin();//begins the spritebatch
+        player.draw(spriteBatch);//draws the player in the window
+        spriteBatch.end();//ends the spritebatch
     }
 
     @Override
