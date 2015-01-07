@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class GameScreen implements Screen {
     public TiledMap map;//sets the object for the map
@@ -19,12 +22,18 @@ public class GameScreen implements Screen {
     public Batch spriteBatch;
     public Player player;
 
+    public static World gameworld;
+    private Box2DDebugRenderer debugRenderer;
+
     public GameScreen() {
         map = new TmxMapLoader() .load("map/map.tmx");//the connecter to the online sit that loads the map
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);//to call the class to render the map
+        gameworld = new World(new Vector2(0, -10), true);
+        debugRenderer = new Box2DDebugRenderer();
 
         float width = Gdx.graphics.getWidth();//finds width of window for use in the game map
         float height = Gdx.graphics.getHeight();//fits thh game map to the window
+
         camera = new OrthographicCamera(14f, 14f * (height / width));//to initialize the camera
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);//sets the view to half of what it is and center it
 
@@ -45,6 +54,8 @@ public class GameScreen implements Screen {
         spriteBatch.begin();//begins the spritebatch
         player.draw(spriteBatch);//draws the player in the window
         spriteBatch.end();//ends the spritebatch
+
+        debugRenderer.render(gameworld, camera.combined);
     }
 
     @Override
