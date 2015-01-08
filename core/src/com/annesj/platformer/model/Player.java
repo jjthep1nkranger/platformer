@@ -13,18 +13,18 @@ import java.util.HashMap;
 
 public class Player {
     public Vector2 position;//a point for x and y positioning
-    public int width;
-    public int height;
+    public float width;
+    public float height;
     public Spritesheet spriteSheet;
     public String currentAnimation;
 
     private float stateTime;// time of the state
     private HashMap<String, Animation> animations;
 
-    public Player() {
+    public Player(int width, int height){
         position = new Vector2(2, 2);//positions the player in the bottom right corner of the screen
-        width = 70;
-        height = 100;
+        this.width = width * (1/70f);
+        this.height = height * (1/70f);
         spriteSheet = new Spritesheet("img/aliens.png", width, height);
         animations = new HashMap<String, Animation>();
 
@@ -36,7 +36,7 @@ public class Player {
         playerBody.setUserData(this);
 
         PolygonShape rectangleShape = new PolygonShape();
-        rectangleShape.setAsBox(width / 2f, height / 2f, new Vector2(width / 2f, height / 2), 0f);
+        rectangleShape.setAsBox(this.width / 2f, this.height / 2f, new Vector2(this.width / 2f, this.height / 2), 0f);
 
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
@@ -67,7 +67,7 @@ public class Player {
     }
 
     public void draw(Batch spriteBatch){
-        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, 70 * (1/70f), 100 * (1/70f));
+        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, width ,height);
     }//the function for drawing the player
 
 

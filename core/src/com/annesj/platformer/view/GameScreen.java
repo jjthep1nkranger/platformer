@@ -38,11 +38,11 @@ public class GameScreen implements Screen {
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);//sets the view to half of what it is and center it
 
         spriteBatch = renderer.getSpriteBatch();//gets acsess to the spritebatch object
-        player = new Player();//creates the player object
+        player = new Player(70, 100);//creates the player object
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)     {
         Gdx.gl.glClearColor(.3019607843f,1f,.34901960784f,1f);//sets the color of your clear
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);//clears the screen using the color youve chosen
 
@@ -51,6 +51,9 @@ public class GameScreen implements Screen {
         renderer.render();//sets render to start
 
         player.update(delta);
+
+        gameworld.step(1/60f, 1, 1);
+
         spriteBatch.begin();//begins the spritebatch
         player.draw(spriteBatch);//draws the player in the window
         spriteBatch.end();//ends the spritebatch
