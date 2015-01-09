@@ -1,5 +1,6 @@
 package com.annesj.platformer.model;
 
+import com.annesj.platformer.controller.LevelController;
 import com.annesj.platformer.view.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -32,7 +33,7 @@ public class Player {
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         bodyDefinition.position.set(position);
 
-        Body playerBody = GameScreen.gameworld.createBody(bodyDefinition);
+        Body playerBody = LevelController.gameworld.createBody(bodyDefinition);
         playerBody.setUserData(this);
 
         PolygonShape rectangleShape = new PolygonShape();
