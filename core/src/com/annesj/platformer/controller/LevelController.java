@@ -29,7 +29,7 @@ public class LevelController {
 
     public static void draw(){
         spriteBatch.begin();//begins the spritebatch
-        player.draw(spriteBatch);//draws the player in the window
+        PlayerController.draw(spriteBatch);
         spriteBatch.end();//ends the spritebatch
 
         debugRenderer.render(gameworld, CameraController.camera.combined);

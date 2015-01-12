@@ -2,6 +2,7 @@ package com.annesj.platformer.view;
 
 import com.annesj.platformer.controller.CameraController;
 import com.annesj.platformer.controller.LevelController;
+import com.annesj.platformer.controller.PlayerController;
 import com.annesj.platformer.model.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -18,13 +19,12 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class GameScreen implements Screen {
 
-    public Player player;
+
 
     public GameScreen() {
         LevelController.initializeController();
         CameraController.initializeController();
-
-        player = new Player(70, 100);//creates the player object
+        PlayerController.initializeController();
     }
 
     @Override
@@ -34,8 +34,7 @@ public class GameScreen implements Screen {
 
         LevelController.update(delta);
         CameraController.update();
-
-        player.update(delta);
+        PlayerController.update(delta);
         LevelController.draw();
         }
 
