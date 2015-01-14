@@ -12,29 +12,17 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.HashMap;
 
-public class Player {
-    public Vector2 position;//a point for x and y positioning
-    public float width;
-    public float height;
-    public Spritesheet spriteSheet;
-    public String currentAnimation;
+public class Player extends Sprite {
 
-    private float stateTime;// time of the state
-    private HashMap<String, Animation> animations;
-
-    public Player(int width, int height){
-        position = new Vector2(2, 2);//positions the player in the bottom right corner of the screen
-        this.width = width * LevelController.UNIT_SCALE;
-        this.height = height * LevelController.UNIT_SCALE;
-        spriteSheet = new Spritesheet("img/aliens.png", width, height);
-        animations = new HashMap<String, Animation>();
+    public Player(Vector2 position, int width, int height){
+        super(position, width, height);
 
         BodyDef bodyDefinition = new BodyDef();
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         bodyDefinition.position.set(position);
 
-        Body playerBody = LevelController.gameworld.createBody(bodyDefinition);
-        playerBody.setUserData(this);
+        physicsBody = LevelController.gameworld.createBody(bodyDefinition);
+        physicsBody.setUserData(this);
 
         PolygonShape rectangleShape = new PolygonShape();
         rectangleShape.setAsBox(this.width / 2f, this.height / 2f, new Vector2(this.width / 2f, this.height / 2), 0f);
@@ -42,7 +30,7 @@ public class Player {
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
 
-        playerBody.createFixture(fixtureDefinition);
+        physicsBody.createFixture(fixtureDefinition);
         rectangleShape.dispose();
 
         animations.put("stand", spriteSheet.createAnimation(0, 0, 0.1f));
@@ -64,16 +52,14 @@ public class Player {
         animations.put("duckLeft", spriteSheet.flipAnimation(animations.get("duck"), true, false));
 
         currentAnimation ="walkLeft";
-        stateTime = 0f;
     }
 
     public void draw(Batch spriteBatch){
-        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, width ,height);
-    }//the function for drawing the player
+       super.draw(spriteBatch);
+    }
 
 
     public void update(float deltaTime){
-        stateTime += deltaTime;
-
+        super.update(deltaTime);
     }
 }
