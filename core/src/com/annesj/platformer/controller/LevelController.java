@@ -1,9 +1,12 @@
 package com.annesj.platformer.controller;
 
+import com.annesj.platformer.model.Bodies;
 import com.annesj.platformer.model.Level;
 import com.annesj.platformer.model.Player;
 import com.annesj.platformer.model.Sprite;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -29,11 +32,12 @@ public class LevelController {
         level = new Level("map/map.tmx");
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);//to call the class to render the map
 
-        gameworld = new World(new Vector2(0, 0), true);
+        gameworld = new World(new Vector2(0, -10), true);
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 
         spriteBatch = renderer.getSpriteBatch();//gets acsess to the spritebatch object
+        createLevelBodies();
     }
 
     public static void draw(){
@@ -57,7 +61,20 @@ public class LevelController {
 
         for (Body body : worldBodies){
             Sprite spriteBody = (Player)body.getUserData();
-            spriteBody.position = body.getPosition();
+
+            if (spriteBody != null){
+                spriteBody.position = body.getPosition();
+
+            }
+
+        }
+    }
+
+    private static void createLevelBodies(){
+        MapObjects mapObjects = level.getLayerObjects(level.getMapLayer("collision"));
+
+        for (MapObject mapObject : mapObjects){
+            Bodies.createBody(mapObject);
         }
     }
 }

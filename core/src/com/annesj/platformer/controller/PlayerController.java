@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 
-
 public class PlayerController {
 
     public static Player player;
@@ -15,7 +14,7 @@ public class PlayerController {
     private static final float MAX_VELOCITY = 5f;
 
     public static void initializeController(){
-        player = new Player(new Vector2(2,2), 70, 100);//creates the player object
+        player = new Player(new Vector2(2,4), 70, 100);//creates the player object
 
     }
 
