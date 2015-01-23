@@ -1,6 +1,7 @@
 package com.annesj.platformer.controller;
 
 import com.annesj.platformer.model.Bodies;
+import com.annesj.platformer.model.InputControl;
 import com.annesj.platformer.model.Level;
 import com.annesj.platformer.model.Player;
 import com.annesj.platformer.model.Sprite;
@@ -41,9 +42,13 @@ public class LevelController {
     }
 
     public static void draw(){
+        spriteBatch.setProjectionMatrix(CameraController.inputcamera.combined);
         spriteBatch.begin();//begins the spritebatch
         PlayerController.draw(spriteBatch);
         spriteBatch.end();//ends the spritebatch
+
+        spriteBatch.setProjectionMatrix(CameraController.inputcamera.combined);
+        InputController.draw(spriteBatch);
 
         debugRenderer.render(gameworld, CameraController.camera.combined);
     }
