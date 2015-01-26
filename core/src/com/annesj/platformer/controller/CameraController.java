@@ -7,6 +7,8 @@ public class CameraController {
     public static OrthographicCamera camera;
     public static OrthographicCamera inputcamera;
 
+    public static float widthScale;
+    public static float heightScale;
 
     public static void initializeController(){
         float width = Gdx.graphics.getWidth();//finds width of window for use in the game map
@@ -34,6 +36,9 @@ public class CameraController {
          inputcamera.viewportHeight = 14f * height / width;
          inputcamera.position.set(inputcamera.viewportWidth / 2f, inputcamera.viewportHeight / 2f, 0);
          inputcamera.update();
+
+         widthScale = width / inputcamera.viewportWidth * LevelController.UNIT_SCALE;
+         heightScale = height / inputcamera.viewportHeight * LevelController.UNIT_SCALE;
      }
 
 }
