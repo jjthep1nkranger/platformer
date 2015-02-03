@@ -16,6 +16,7 @@ public class Sprite {
     public float height;
     public Spritesheet spriteSheet;
     public String currentAnimation;
+    public String direction;
 
     protected float stateTime;// time of the state
     protected HashMap<String, Animation> animations;
@@ -27,6 +28,7 @@ public class Sprite {
         spriteSheet = new Spritesheet("img/aliens.png", width, height);
         animations = new HashMap<String, Animation>();
         stateTime = 0f;
+        direction = "right";
     }
 
     public void draw(Batch spriteBatch){

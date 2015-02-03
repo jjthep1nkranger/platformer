@@ -19,6 +19,6 @@ public class Level {
     }
 
     public MapObjects getLayerObjects(MapLayer mapLayer){
-    return mapLayer.getObjects();
+        return mapLayer.getObjects();
     }
 }

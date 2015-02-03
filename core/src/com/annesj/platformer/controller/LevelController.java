@@ -42,7 +42,7 @@ public class LevelController {
     }
 
     public static void draw(){
-        spriteBatch.setProjectionMatrix(CameraController.inputcamera.combined);
+        spriteBatch.setProjectionMatrix(CameraController.camera.combined);
         spriteBatch.begin();//begins the spritebatch
         PlayerController.draw(spriteBatch);
         spriteBatch.end();//ends the spritebatch
@@ -77,6 +77,11 @@ public class LevelController {
 
     private static void createLevelBodies(){
         MapObjects mapObjects = level.getLayerObjects(level.getMapLayer("collision"));
+
+        for (MapObject mapObject : mapObjects){
+            Bodies.createBody(mapObject);
+        }
+        mapObjects = level.getLayerObjects(level.getMapLayer("block"));
 
         for (MapObject mapObject : mapObjects){
             Bodies.createBody(mapObject);
