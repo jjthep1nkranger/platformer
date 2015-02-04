@@ -1,6 +1,7 @@
 package com.annesj.platformer.controller;
 
 import com.annesj.platformer.model.Bodies;
+import com.annesj.platformer.model.CollisionListener;
 import com.annesj.platformer.model.InputControl;
 import com.annesj.platformer.model.Level;
 import com.annesj.platformer.model.Player;
@@ -34,6 +35,7 @@ public class LevelController {
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);//to call the class to render the map
 
         gameworld = new World(new Vector2(0, -10), true);
+        gameworld.setContactListener(new CollisionListener());
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 
