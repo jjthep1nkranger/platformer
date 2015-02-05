@@ -15,13 +15,17 @@ public class InputController {
     private static Spritesheet spriteSheet;
     private static InputControl right;
     private static InputControl left;
+    private static InputControl jump;
 
     public static void initializeController(){
         inputControls = new ArrayList<InputControl>();
         spriteSheet = new Spritesheet("img/touch-controls.png", 80, 80);
-        right = new InputControl(new Vector2(0,0), spriteSheet.spriteFrames[1], "right");
-        left = new InputControl(new Vector2(0,0), spriteSheet.spriteFrames[1], "left");
+        right = new InputControl(new Vector2(1,0), spriteSheet.spriteFrames[1], "right");
+        left = new InputControl(new Vector2(0,0), spriteSheet.spriteFrames[0], "left");
+        jump = new InputControl(new Vector2(12.5f,0), spriteSheet.spriteFrames[2], "jump");
         inputControls.add(right);
+        inputControls.add(left);
+        inputControls.add(jump);
         Gdx.input.setInputProcessor(createInputAdapter());
     }
 
@@ -44,6 +48,10 @@ public class InputController {
                 else if (keycode == Input.Keys.LEFT){
                     PlayerController.movementAction = "left";
                 }
+
+                else if (keycode == Input.Keys.UP){
+                    PlayerController.movementAction = "jump";
+                }
                 return true;
             }
 
@@ -54,6 +62,10 @@ public class InputController {
                 }
 
                 else if (keycode == Input.Keys.LEFT){
+                    PlayerController.movementAction = "";
+                }
+
+                else if (keycode == Input.Keys.UP){
                     PlayerController.movementAction = "";
                 }
                 return true;
@@ -74,6 +86,12 @@ public class InputController {
                             PlayerController.movementAction = "left";
                         }
                     }
+
+                    else if (jump.getBoundingBox().contains(screenX, screenY)) {
+                        if (input.action.equalsIgnoreCase("jump")) {
+                            PlayerController.movementAction = "jump";
+                        }
+                    }
                 }
                 return true;
             }
@@ -90,6 +108,12 @@ public class InputController {
 
                     else if (left.getBoundingBox().contains(screenX, screenY)) {
                         if (input.action.equalsIgnoreCase("left")) {
+                            PlayerController.movementAction = "";
+                        }
+                    }
+
+                    else if (jump.getBoundingBox().contains(screenX, screenY)) {
+                        if (input.action.equalsIgnoreCase("jump")) {
                             PlayerController.movementAction = "";
                         }
                     }
