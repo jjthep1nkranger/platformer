@@ -12,6 +12,16 @@ public class CollisionListener implements ContactListener {
     public void beginContact(Contact contact) {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
+
+        boolean sensorA = fixtureA.isSensor();
+        boolean sensorB = fixtureB.isSensor();
+
+        if (sensorA){
+            System.out.println("Fixture A was a sensor.");
+        }
+        else if (sensorB){
+            System.out.println("Fixture B was a sensor.");
+        }
     }
 
     @Override
