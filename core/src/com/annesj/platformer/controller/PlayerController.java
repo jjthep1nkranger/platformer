@@ -55,7 +55,10 @@ public class PlayerController {
              player.physicsBody.applyLinearImpulse(-VELOCITY, 0f, position.x, position.y, true);
              player.direction = "left";
          }
-
+         else if (movementAction.equalsIgnoreCase("jump")){
+             player.physicsBody.applyLinearImpulse(0f,VELOCITY, position.x, position.y, true);
+             player.direction = "jump";
+         }
          if (Math.abs(velocity.x) > 0){
              playerState = State.Walk;
 
@@ -72,8 +75,11 @@ public class PlayerController {
             setRightAnimation();
 
         }
-        else if (player.direction.equals("lefts")){
+        else if (player.direction.equals("left")){
             setLeftAnimation();
+        }
+        else if (player.direction.equals("jump")){
+            setJumpAnimation();
         }
     }
 
@@ -94,4 +100,14 @@ public class PlayerController {
             player.currentAnimation = "idleRight";
         }
     }
+
+    private static void setJumpAnimation(){
+        if (playerState == State.Jump){
+            player.currentAnimation = "jumpright";
+        }
+        else if (playerState == State.Jump){
+            player.currentAnimation = "jumpleft";
+        }
+    }
+
 }

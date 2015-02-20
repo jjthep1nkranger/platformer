@@ -4,6 +4,7 @@ import com.annesj.platformer.controller.CameraController;
 import com.annesj.platformer.controller.InputController;
 import com.annesj.platformer.controller.LevelController;
 import com.annesj.platformer.controller.PlayerController;
+import com.annesj.platformer.controller.SoundController;
 import com.annesj.platformer.model.InputControl;
 import com.annesj.platformer.model.Player;
 import com.badlogic.gdx.Gdx;
@@ -24,6 +25,7 @@ public class GameScreen implements Screen {
 
 
     public GameScreen() {
+        SoundController.initializeController();
         LevelController.initializeController();
         CameraController.initializeController();
         PlayerController.initializeController();
